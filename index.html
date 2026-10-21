@@ -112,6 +112,9 @@ main{position:relative;flex:1;min-height:0}
 .class-card .school{font-family:var(--display);font-size:clamp(20px,3.2vw,26px);font-weight:800;color:var(--ink)}
 .class-card .meta{display:flex;gap:8px 18px;flex-wrap:wrap;justify-content:center;font-size:clamp(16px,2.4vw,19px);font-weight:700;color:var(--ink-soft)}
 .class-card .meta b{color:var(--grape);font-weight:800}
+.set-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--ui);font-weight:800;font-size:clamp(17px,2.6vw,20px);color:var(--ink);background:var(--paper);padding:8px 20px 8px 14px;border-radius:999px;box-shadow:0 4px 0 rgba(40,54,89,.12),0 8px 18px rgba(40,54,89,.12);transition:transform .12s}
+.set-btn:active{transform:translateY(3px)}
+.set-btn svg{width:30px;height:30px}
 .start-hint{margin:0;font-family:var(--ui);font-size:14px;font-weight:700;color:var(--ink-soft);background:rgba(255,255,255,.7);padding:5px 14px;border-radius:999px}
 /* ---------- home ---------- */
 #scrHome{overflow-y:auto;padding-block:6px 24px;align-items:center}
@@ -357,7 +360,7 @@ main{position:relative;flex:1;min-height:0}
       <h1 class="logo"><span class="w1">عالم</span> <span class="w3">الحروف</span></h1>
       <div class="class-card"><span class="school">مدرسة لقمان الحكيم الابتدائية</span><div class="meta"><span>الصف: <b>الأول / ٤</b></span><span>المعلم: <b>عمرو معافا</b></span></div></div>
       <button id="startBtn" class="btn-big">ابدأ اللعب</button>
-      <p class="start-hint">للمعلم: اضغط مطولًا على الترس أثناء اللعب لفتح الإعدادات</p>
+      <button id="teacherSetBtn" class="set-btn"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l2.4 3.2 3.9-1 .9 3.9 3.8 1.2-1.1 3.8L28.6 16l-2.7 2.9 1.1 3.8-3.8 1.2-.9 3.9-3.9-1L16 29l-2.4-3.2-3.9 1-.9-3.9-3.8-1.2 1.1-3.8L3.4 16l2.7-2.9-1.1-3.8 3.8-1.2.9-3.9 3.9 1z" fill="#8E5BD8" stroke="#283659" stroke-width="2" stroke-linejoin="round"/><circle cx="16" cy="16" r="5" fill="#fff" stroke="#283659" stroke-width="2"/></svg><span>إعدادات المعلم</span></button>
       <p class="credit">إعداد المصممة: ريم الحربي <span aria-hidden="true">·</span> <a href="https://www.tiktok.com/@raa.file" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 1.5v8.2a2.6 2.6 0 1 1-2.2-2.6V4.8a4.9 4.9 0 1 0 4.5 4.9V5.4a4.6 4.6 0 0 0 2.4.7V3.8A2.4 2.4 0 0 1 12.3 1.5z" fill="currentColor"/></svg>تيك توك <span dir="ltr">@raa.file</span></a></p>
     </section>
 
@@ -814,6 +817,7 @@ gear.addEventListener("pointerdown",e=>{e.preventDefault();held=false;gear.class
 ["pointerup","pointerleave","pointercancel"].forEach(ev=>gear.addEventListener(ev,()=>{if(holdT){clearTimeout(holdT);holdT=null}if(gear.classList.contains("holding")){gear.classList.remove("holding");if(ev==="pointerup"&&!held)toast("اضغط مطولًا على الترس لفتح إعدادات المعلم")}}));
 gear.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openSettings()}});
 gear.addEventListener("contextmenu",e=>e.preventDefault());
+$("teacherSetBtn").addEventListener("click",()=>{FX.init();FX.resume();FX.tap();openSettings()});
 
 /* ================= settings ================= */
 const TABS=[["letters","الحروف"],["general","عام"]];
